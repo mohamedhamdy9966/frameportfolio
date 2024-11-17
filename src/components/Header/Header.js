@@ -12,40 +12,39 @@ import {
   Div1,
   Div2,
   Div3,
-  NavLink,
   SocialIcons,
 } from "./HeaderStyles";
 
 const Header = () => (
   <Container>
     <Div1>
-      <Link href="/">
+      <Link href="/" legacyBehavior>
         <a
           style={{
             display: "flex",
             alignItems: "center",
             color: "white",
-            marginBottom: "20;",
+            marginBottom: "20",
           }}
         >
-          <DiCssdeck size="3rem" /> <Logo>Frame</Logo>
+          <DiCssdeck size="3rem" /> <span>Frame</span>
         </a>
       </Link>
     </Div1>
     <Div2>
       <li>
-        <Link href="#projects">
-          <NavLink>Projects</NavLink>
+        <Link href="#projects" legacyBehavior>
+          Projects
         </Link>
       </li>
       <li>
-        <Link href="#tech">
-          <NavLink>Technologies</NavLink>
+        <Link href="#tech" legacyBehavior>
+          Technologies
         </Link>
       </li>
       <li>
-        <Link href="#about">
-          <NavLink>About</NavLink>
+        <Link href="#about" legacyBehavior>
+          About
         </Link>
       </li>
     </Div2>

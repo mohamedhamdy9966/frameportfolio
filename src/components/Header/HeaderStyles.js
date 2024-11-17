@@ -27,8 +27,10 @@ export const Div1 = styled.div`
   }
 `;
 
-export const Logo = styled.span`
+const Span = styled.span`
   font-size: 2rem;
+  font-weight: bold;
+  margin-left: 10px;
 `;
 
 export const Div2 = styled.div`
