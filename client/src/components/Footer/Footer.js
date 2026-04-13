@@ -31,7 +31,7 @@ const Footer = () => {
       </LinkList>
       <SocialIconsContainer>
         <CompanyContainer>
-          <Slogan>Taxi Agency</Slogan>
+          <Slogan>Taxi Marketing Agency</Slogan>
         </CompanyContainer>
         <SocialContainer>
           <SocialIcons href="https://facebook.com">

@@ -18,36 +18,36 @@ const Technologies = () => (
   <Section id="tech">
     <SectionDivider />
     <br/>
-    <SectionTitle>Technologies</SectionTitle>
-    <SectionText>Frame Frame Frame</SectionText>
+    <SectionTitle>Capabilities</SectionTitle>
+    <SectionText>We provide full-funnel marketing solutions to elevate your brand and drive results.</SectionText>
     <List>
       <ListItem>
         <DiFirebase size="3rem" />
         <ListContainer>
-          <ListTitle>Marketing</ListTitle>
+          <ListTitle>Digital Strategy</ListTitle>
           <ListParagraph>
             Experience with <br />
-            SocialMedia Marketing
+            SEO & Content Marketing
           </ListParagraph>
         </ListContainer>
       </ListItem>
       <ListItem>
         <DiReact size="3rem" />
         <ListContainer>
-          <ListTitle>Business Development</ListTitle>
+          <ListTitle>Social Media</ListTitle>
           <ListParagraph>
             Experience with <br />
-            Benefits table study
+            Paid Ads & Audience Growth
           </ListParagraph>
         </ListContainer>
       </ListItem>
       <ListItem>
         <DiZend size="3rem" />
         <ListContainer>
-          <ListTitle>UI/UX</ListTitle>
+          <ListTitle>Brand Identity</ListTitle>
           <ListParagraph>
             Experience with <br />
-            Figma & Behance
+            Visual Identity & Web Design
           </ListParagraph>
         </ListContainer>
       </ListItem>

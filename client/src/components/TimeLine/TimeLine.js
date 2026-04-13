@@ -66,7 +66,7 @@ const Timeline = () => {
   return (
     <Section id="about">
       <SectionTitle>About Taxi</SectionTitle>
-      <SectionText>lorem csmdjskd sjdkskdmdsjsds</SectionText>
+      <SectionText>At Taxi, we are a growth-driven marketing agency passionate about scaling businesses through innovative digital campaigns. We help our clients find their unique voice and connect with their target audiences effectively.</SectionText>
       <CarouselContainer ref={carouselRef} onScroll={handleScroll}>
         <>
           {TimeLineData.map((item, index) => (

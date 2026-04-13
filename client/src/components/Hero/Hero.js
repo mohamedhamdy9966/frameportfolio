@@ -13,9 +13,9 @@ const Hero = () => (
     <LeftSection>
       <SectionTitle main center>
         Welcome to <br />
-        Taxi Agency
+        Taxi Marketing Agency
       </SectionTitle>
-      <SectionText>All You need for Your Business</SectionText>
+      <SectionText>Accelerating your brand's journey with data-driven marketing strategies.</SectionText>
       <Button onClick={() => (window.location = "https://facebook.com")}>
         Learn More
       </Button>
