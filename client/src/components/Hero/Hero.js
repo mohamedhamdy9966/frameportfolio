@@ -13,7 +13,7 @@ const Hero = () => (
     <LeftSection>
       <SectionTitle main center>
         Welcome to <br />
-        Frame Agency
+        Taxi Agency
       </SectionTitle>
       <SectionText>All You need for Your Business</SectionText>
       <Button onClick={() => (window.location = "https://facebook.com")}>

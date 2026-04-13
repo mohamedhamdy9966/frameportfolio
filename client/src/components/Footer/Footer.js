@@ -25,13 +25,13 @@ const Footer = () => {
         <LinkColumn>
           <LinkTitle>Email</LinkTitle>
           <LinkItem href="mailto:contact@jsmastery.net">
-            frame@contact.com
+            info@taxi.com
           </LinkItem>
         </LinkColumn>
       </LinkList>
       <SocialIconsContainer>
         <CompanyContainer>
-          <Slogan>Frame inc</Slogan>
+          <Slogan>Taxi Agency</Slogan>
         </CompanyContainer>
         <SocialContainer>
           <SocialIcons href="https://facebook.com">

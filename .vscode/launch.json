@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: debug client",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn run dev",
+      "cwd": "${workspaceFolder}/client"
+    },
+    {
+      "name": "Next.js: debug admin",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn run dev",
+      "cwd": "${workspaceFolder}/admin"
+    },
+    {
+      "name": "Nest.js: debug server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn run start:dev",
+      "cwd": "${workspaceFolder}/server"
+    }
+  ]
+}
