@@ -19,6 +19,7 @@ module.exports = {
 
     return config;
   },
+  turbopack: {},
   compiler: {
     styledComponents: true,
   },
