@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 

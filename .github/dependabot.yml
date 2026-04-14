@@ -28,7 +28,7 @@ updates:
       dependencies:
         patterns:
           - "*"
-  - package-ecosystem: "yarn"
+  - package-ecosystem: "npm"
     directory: "/server"
     schedule:
       interval: "weekly"
