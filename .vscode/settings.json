@@ -1,31 +1,32 @@
 {
-    "conventionalCommits.scopes": [
-        "root",
-        "github",
-        "client",
-        "server",
-        "client/components",
-        "client/pages",
-        "server/components",
-        "server/pages",
-        "client/pages/api",
-        "server/pages/api",
-        "client/pages/api/auth",
-        "server/pages/api/auth",
-        "admin"
-    ],
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+  "conventionalCommits.scopes": [
+    "root",
+    "github",
+    "client",
+    "server",
+    "client/components",
+    "client/pages",
+    "server/components",
+    "server/pages",
+    "client/pages/api",
+    "server/pages/api",
+    "client/pages/api/auth",
+    "server/pages/api/auth",
+    "admin",
+    "taxi/id"
+  ],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
