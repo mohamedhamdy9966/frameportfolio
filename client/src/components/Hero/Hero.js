@@ -16,7 +16,7 @@ const Hero = () => (
         Welcome to <br />
         Taxi Marketing Agency
       </SectionTitle>
-      <SectionText>Accelerating your brand's journey with data-driven marketing strategies.</SectionText>
+      <SectionText>Accelerating your brand&apos;s journey with data-driven marketing strategies.</SectionText>
       <Button
         onClick={() => {
           const el = document.getElementById('about') || document.getElementById('projects');
