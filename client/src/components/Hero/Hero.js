@@ -88,7 +88,7 @@ const Hero = () => {
         <motion.div ref={badgeRef} initial={{ opacity: 0 }}>
           <HeroBadge>
             <span className="dot" />
-            Taxi Marketing Agency
+            Taxi Digital Solutions Agency
           </HeroBadge>
         </motion.div>
 

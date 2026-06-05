@@ -10,12 +10,12 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: 'Taxi Marketing Agency | Performance-Driven Growth',
+  title: 'Taxi Digital Solutions | Result-Driven Growth',
   description:
-    'Taxi is a data-driven marketing agency that accelerates your brand\'s growth through paid media, SEO, content, and conversion optimisation.',
-  keywords: 'Taxi, marketing agency, digital strategy, SEO, paid ads, branding, performance marketing',
+    'Taxi is a data-driven Digital solutions agency that accelerates your brand\'s growth through paid media, SEO, content, and conversion optimisation.',
+  keywords: 'Taxi, Digital solutions agency, digital strategy, SEO, paid ads, branding, performance marketing',
   openGraph: {
-    title: 'Taxi Marketing Agency',
+    title: 'Taxi Digital Solutions',
     description: 'Accelerate your brand\'s growth with data-driven marketing.',
     type: 'website',
   },

@@ -63,7 +63,7 @@ const Footer = () => (
       {/* Bottom row */}
       <FooterBottom>
         <Copyright>
-          © {new Date().getFullYear()} Taxi Marketing Agency. All rights reserved.
+          © {new Date().getFullYear()} Taxi Digital Solutions Agency. All rights reserved.
         </Copyright>
 
         <SocialContainer>
