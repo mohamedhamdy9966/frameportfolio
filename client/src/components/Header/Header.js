@@ -51,7 +51,7 @@ const Header = () => {
             whileHover={{ scale: 1.05, rotate: 5 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <Image src={Taxi06} alt="Taxi" width={100} height={100}/>
+            <Image src={Taxi06} alt="Taxi" width={60} height={60}/>
             <Image src={Taxi05} alt="Taxi" width={60} height={30}/>
           </motion.a>
         </Link>
