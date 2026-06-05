@@ -1,9 +1,11 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import gsap from 'gsap';
 import {
   BlogCard,
-  CardInfo,
+  CardBody,
+  ImgWrapper,
   ExternalLinks,
   GridContainer,
   HeaderThree,
@@ -12,81 +14,88 @@ import {
   TagList,
   TitleContent,
   UtilityList,
+  CardInfo,
   Img,
 } from "./ProjectsStyles";
 import { Section, SectionDivider, SectionTitle } from "../../styles/GlobalComponents";
 import { projects } from "../../constants/constants";
 
 const Projects = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const sectionRef = useRef(null);
+  const titleRef   = useRef(null);
+  const gridRef    = useRef(null);
+  const isInView   = useInView(sectionRef, { once: true, margin: "-80px" });
 
+  /* ── GSAP title reveal ── */
+  useEffect(() => {
+    if (!isInView) return;
+    gsap.fromTo(titleRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+    );
+  }, [isInView]);
+
+  /* ── Framer variants ── */
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+    hidden:  {},
+    visible: { transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
-    }
+    hidden:  { opacity: 0, y: 60, scale: 0.94 },
+    visible: { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
   };
 
   return (
-    <Section nopadding id="projects" ref={ref}>
-      <SectionDivider />
-      <SectionTitle main>Projects</SectionTitle>
+    <Section nopadding id="projects" ref={sectionRef}>
+      <div style={{ padding: "40px 48px 0" }} ref={titleRef}>
+        <SectionDivider />
+        <SectionTitle main>Projects</SectionTitle>
+      </div>
+
       <motion.div
+        ref={gridRef}
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
+        style={{ padding: "0 48px" }}
       >
         <GridContainer>
           {projects.map(({ id, image, title, description, tags, source, visit }) => (
-            <motion.div key={id} variants={cardVariants} whileHover={{ y: -10, transition: { duration: 0.2 } }}>
+            <motion.div key={id} variants={cardVariants}>
               <BlogCard>
-                <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
-                  <Img src={image} />
-                </motion.div>
-                <TitleContent>
-                  <HeaderThree title>{title}</HeaderThree>
-                  <Hr />
-                </TitleContent>
-                <CardInfo>{description}</CardInfo>
-                <div>
-                  <TitleContent>Services</TitleContent>
+                {/* Image with zoom on hover */}
+                <ImgWrapper>
+                  <Img src={image} alt={title} />
+                </ImgWrapper>
+
+                <CardBody>
+                  <TitleContent>
+                    <HeaderThree $title>{title}</HeaderThree>
+                    <Hr />
+                  </TitleContent>
+
+                  <CardInfo>{description}</CardInfo>
+
                   <TagList>
                     {tags.map((tag) => (
                       <Tag key={tag}>{tag}</Tag>
                     ))}
                   </TagList>
-                </div>
-                <UtilityList>
-                  <ExternalLinks 
-                    href={visit}
-                    whileHover={{ scale: 1.1, backgroundColor: "#FFC107", color: "#0A0A0A" }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Case Study
-                  </ExternalLinks>
-                  <ExternalLinks 
-                    href={source}
-                    whileHover={{ scale: 1.1, backgroundColor: "#FFC107", color: "#0A0A0A" }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Website
-                  </ExternalLinks>
-                </UtilityList>
+
+                  <UtilityList>
+                    <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                      <ExternalLinks href={visit} target="_blank" rel="noopener noreferrer">
+                        Case Study →
+                      </ExternalLinks>
+                    </motion.li>
+                    <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                      <ExternalLinks href={source} target="_blank" rel="noopener noreferrer">
+                        Website ↗
+                      </ExternalLinks>
+                    </motion.li>
+                  </UtilityList>
+                </CardBody>
               </BlogCard>
             </motion.div>
           ))}
