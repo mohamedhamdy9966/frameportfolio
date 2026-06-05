@@ -1,4 +1,6 @@
 "use client";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,15 +18,27 @@ import {
   Div3,
   NavLink,
   SocialIcons,
+  CheckeredStrip,
 } from "./HeaderStyles";
 
 const Header = () => {
+  const headerRef = useRef(null);
   const linkVariants = {
     hover: { scale: 1.1, color: "#FFC107", transition: { duration: 0.2 } },
   };
 
+  useEffect(() => {
+    gsap.fromTo(
+      headerRef.current,
+      { y: -60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power4.out", delay: 0.2 }
+    );
+  }, []);
+
   return (
-    <Container>
+    <>
+      <CheckeredStrip />
+      <Container ref={headerRef}>
       <Div1>
         <Link href="/" legacyBehavior>
           <motion.a
@@ -80,6 +94,7 @@ const Header = () => {
         </SocialIcons>
       </Div3>
     </Container>
+    </>
   );
 };
 

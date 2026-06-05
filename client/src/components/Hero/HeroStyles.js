@@ -27,8 +27,8 @@ export const TaxiStripe = styled.div`
   position: absolute;
   bottom: -40px;
   left: 0;
-  width: 200px;
-  height: 4px;
+  width: 100%;
+  height: 8px;
   background: repeating-linear-gradient(
     90deg,
     #FFC107,
@@ -36,9 +36,8 @@ export const TaxiStripe = styled.div`
     #0A0A0A 20px,
     #0A0A0A 40px
   );
-  animation: ${moveStripe} 1s linear infinite;
-  
-  @media ${(props) => props.theme.breakpoints.sm} {
-    width: 100%;
-  }
+  animation: ${moveStripe} ${props => props.speed || '1.5s'} linear infinite;
+  box-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+  border-radius: 4px;
+  transition: animation-duration 0.4s ease;
 `;

@@ -127,3 +127,19 @@ export const SocialIcons = styled.a`
     cursor: pointer;
   }
 `;
+
+export const CheckeredStrip = styled.div`
+  width: 100%;
+  height: 12px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFC107,
+    #FFC107 15px,
+    #0A0A0A 15px,
+    #0A0A0A 30px
+  );
+  border-bottom: 1px solid #FFC107;
+  opacity: 0.9;
+  z-index: 100;
+`;
+

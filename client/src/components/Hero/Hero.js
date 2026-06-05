@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import {
@@ -11,6 +11,7 @@ import Button from "../../styles/GlobalComponents/Button";
 import { LeftSection, TaxiStripe } from "./HeroStyles";
 
 const Hero = () => {
+  const [isHovered, setIsHovered] = useState(false);
   const titleRef = useRef(null);
   const textRef = useRef(null);
   const buttonRef = useRef(null);
@@ -58,6 +59,8 @@ const Hero = () => {
           ref={buttonRef}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onHoverStart={() => setIsHovered(true)}
+          onHoverEnd={() => setIsHovered(false)}
         >
           <Button
             onClick={() => {
@@ -68,7 +71,7 @@ const Hero = () => {
             Get a Free Audit
           </Button>
         </motion.div>
-        <TaxiStripe />
+        <TaxiStripe speed={isHovered ? "0.3s" : "1.5s"} />
       </LeftSection>
     </Section>
   );
