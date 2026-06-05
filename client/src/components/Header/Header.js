@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import Taxi06 from "../../styles/assets/Taxi-06.png";
+import Taxi05 from "../../styles/assets/Taxi-05.png";
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -35,8 +37,8 @@ const Header = () => {
             whileHover={{ scale: 1.05, rotate: 5 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <Image src="../../styles/assets/Taxi-06.png" alt="Taxi" width={100} height={100}/>
-            <Image src="../../styles/assets/Taxi-05.png" alt="Taxi" width={100} height={100}/>
+            <Image src={Taxi06} alt="Taxi" width={100} height={100}/>
+            <Image src={Taxi05} alt="Taxi" width={100} height={100}/>
           </motion.a>
         </Link>
       </Div1>
