@@ -1,20 +1,19 @@
 "use client";
-import Link from "next/link";
-import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import {
   AiFillFacebook,
   AiFillInstagram,
   AiFillLinkedin,
 } from "react-icons/ai";
-import { DiCssdeck } from "react-icons/di";
 import {
   Container,
   Div1,
   Div2,
   Div3,
-  SocialIcons,
   NavLink,
+  SocialIcons,
 } from "./HeaderStyles";
 
 const Header = () => {
@@ -36,8 +35,8 @@ const Header = () => {
             whileHover={{ scale: 1.05, rotate: 5 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <DiCssdeck size="3rem" style={{ color: "#FFC107" }} />
-            <span style={{ marginLeft: "10px", fontWeight: "bold" }}>Taxi</span>
+            <Image src="../../styles/assets/Taxi-06.png" alt="Taxi" width={100} height={100}/>
+            <Image src="../../styles/assets/Taxi-05.png" alt="Taxi" width={100} height={100}/>
           </motion.a>
         </Link>
       </Div1>
