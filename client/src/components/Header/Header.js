@@ -52,7 +52,7 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 400 }}
           >
             <Image src={Taxi06} alt="Taxi" width={100} height={100}/>
-            <Image src={Taxi05} alt="Taxi" width={100} height={100}/>
+            <Image src={Taxi05} alt="Taxi" width={200} height={50}/>
           </motion.a>
         </Link>
       </Div1>
