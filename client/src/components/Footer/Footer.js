@@ -5,16 +5,8 @@ import {
   AiFillFacebook,
   AiFillInstagram,
   AiFillLinkedin,
-  AiTiktok,
-  AiYoutube,
-  AiTwitter,
 } from "react-icons/ai";
-import {
-  WhatsappIcon,
-  TelegramIcon,
-  SnapchatIcon,
-  PinterestIcon,
-} from "react-icons/fa";
+import { FaWhatsapp, FaTelegram, FaSnapchat, FaPinterest, FaTiktok, FaYoutube, FaXTwitter  } from "react-icons/fa";
 import { SocialIcons } from "../Header/HeaderStyles";
 import {
   FooterWrapper,
@@ -36,18 +28,18 @@ const socials = [
   { Icon: AiFillFacebook, href: "https://facebook.com", label: "Facebook" },
   { Icon: AiFillLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
   { Icon: AiFillInstagram, href: "https://instagram.com", label: "Instagram" },
-  { Icon: AiTiktok, href: "https://tiktok.com", label: "TikTok" },
-  { Icon: AiYoutube, href: "https://youtube.com", label: "YouTube" },
-  { Icon: AiTwitter, href: "https://twitter.com", label: "Twitter" },
-  { Icon: WhatsappIcon, href: "https://wa.me/01111255279", label: "WhatsApp" },
-  { Icon: TelegramIcon, href: "https://t.me/taxi", label: "Telegram" },
+  { Icon: FaTiktok , href: "https://tiktok.com", label: "TikTok" },
+  { Icon: FaYoutube , href: "https://youtube.com", label: "YouTube" },
+  { Icon: FaXTwitter , href: "https://twitter.com", label: "Twitter" },
+  { Icon: FaWhatsapp, href: "https://wa.me/01111255279", label: "WhatsApp" },
+  { Icon: FaTelegram, href: "https://t.me/taxi", label: "Telegram" },
   {
-    Icon: SnapchatIcon,
+    Icon: FaSnapchat,
     href: "https://snapchat.com/add/taxi",
     label: "Snapchat",
   },
   {
-    Icon: PinterestIcon,
+    Icon: FaPinterest,
     href: "https://pinterest.com/taxi",
     label: "Pinterest",
   },
