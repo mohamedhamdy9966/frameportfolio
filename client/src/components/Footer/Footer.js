@@ -6,7 +6,8 @@ import {
   AiFillInstagram,
   AiFillLinkedin,
 } from "react-icons/ai";
-import { FaWhatsapp, FaTelegram, FaSnapchat, FaPinterest, FaTiktok, FaYoutube, FaXTwitter  } from "react-icons/fa";
+import { FaWhatsapp, FaTelegram, FaSnapchat, FaPinterest, FaTiktok, FaYoutube  } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { SocialIcons } from "../Header/HeaderStyles";
 import {
   FooterWrapper,
