@@ -6,7 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Taxi06 from "../../styles/assets/Taxi-06.png";
 import Taxi05 from "../../styles/assets/Taxi-05.png";
-import { AiFillFacebook, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
+import {
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillLinkedin,
+} from "react-icons/ai";
+import { FaWhatsapp, FaTelegram, FaSnapchat, FaPinterest, FaTiktok, FaYoutube  } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import {
   Container,
   Div1,
@@ -25,9 +31,24 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { Icon: AiFillFacebook,  href: "https://facebook.com",  label: "Facebook"  },
-  { Icon: AiFillLinkedin,  href: "https://linkedin.com",  label: "LinkedIn"  },
+  { Icon: AiFillFacebook, href: "https://facebook.com", label: "Facebook" },
+  { Icon: AiFillLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
   { Icon: AiFillInstagram, href: "https://instagram.com", label: "Instagram" },
+  { Icon: FaTiktok , href: "https://tiktok.com", label: "TikTok" },
+  { Icon: FaYoutube , href: "https://youtube.com", label: "YouTube" },
+  { Icon: FaXTwitter , href: "https://twitter.com", label: "Twitter" },
+  { Icon: FaWhatsapp, href: "https://wa.me/01111255279", label: "WhatsApp" },
+  { Icon: FaTelegram, href: "https://t.me/taxi", label: "Telegram" },
+  {
+    Icon: FaSnapchat,
+    href: "https://snapchat.com/add/taxi",
+    label: "Snapchat",
+  },
+  {
+    Icon: FaPinterest,
+    href: "https://pinterest.com/taxi",
+    label: "Pinterest",
+  },
 ];
 
 const Header = () => {
