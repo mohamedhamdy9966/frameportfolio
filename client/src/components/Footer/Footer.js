@@ -1,7 +1,20 @@
-'use client';
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { AiFillFacebook, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
+import {
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillLinkedin,
+  AiTiktok,
+  AiYoutube,
+  AiTwitter,
+} from "react-icons/ai";
+import {
+  WhatsappIcon,
+  TelegramIcon,
+  SnapchatIcon,
+  PinterestIcon,
+} from "react-icons/fa";
 import { SocialIcons } from "../Header/HeaderStyles";
 import {
   FooterWrapper,
@@ -20,9 +33,24 @@ import {
 } from "./FooterStyles";
 
 const socials = [
-  { Icon: AiFillFacebook,  href: "https://facebook.com",  label: "Facebook"  },
-  { Icon: AiFillLinkedin,  href: "https://linkedin.com",  label: "LinkedIn"  },
+  { Icon: AiFillFacebook, href: "https://facebook.com", label: "Facebook" },
+  { Icon: AiFillLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
   { Icon: AiFillInstagram, href: "https://instagram.com", label: "Instagram" },
+  { Icon: AiTiktok, href: "https://tiktok.com", label: "TikTok" },
+  { Icon: AiYoutube, href: "https://youtube.com", label: "YouTube" },
+  { Icon: AiTwitter, href: "https://twitter.com", label: "Twitter" },
+  { Icon: WhatsappIcon, href: "https://wa.me/01111255279", label: "WhatsApp" },
+  { Icon: TelegramIcon, href: "https://t.me/taxi", label: "Telegram" },
+  {
+    Icon: SnapchatIcon,
+    href: "https://snapchat.com/add/taxi",
+    label: "Snapchat",
+  },
+  {
+    Icon: PinterestIcon,
+    href: "https://pinterest.com/taxi",
+    label: "Pinterest",
+  },
 ];
 
 const Footer = () => (
@@ -33,8 +61,8 @@ const Footer = () => (
         <BrandColumn>
           <BrandName>TAXI</BrandName>
           <Slogan>
-            Accelerating brands through data-driven marketing.
-            Fast results. Measurable growth.
+            Accelerating brands through data-driven marketing. Fast results.
+            Measurable growth.
           </Slogan>
         </BrandColumn>
 
@@ -63,7 +91,8 @@ const Footer = () => (
       {/* Bottom row */}
       <FooterBottom>
         <Copyright>
-          © {new Date().getFullYear()} Taxi Digital Solutions Agency. All rights reserved.
+          © {new Date().getFullYear()} Taxi Digital Solutions Agency. All rights
+          reserved.
         </Copyright>
 
         <SocialContainer>
@@ -74,8 +103,13 @@ const Footer = () => (
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 350, damping: 14 }}
             >
-              <SocialIcons href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
-                <Icon size="2.6rem" />
+              <SocialIcons
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+              >
+                <Icon size="30px" />
               </SocialIcons>
             </motion.div>
           ))}
