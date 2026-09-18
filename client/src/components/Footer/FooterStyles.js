@@ -76,6 +76,56 @@ export const Slogan = styled.p`
   }
 `;
 
+export const SloganMini = styled.p`
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 10px;
+  letter-spacing: 0.03em;
+`;
+
+/* Live-status strip between the link columns and the bottom row */
+export const ContactLine = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 0;
+  margin-bottom: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.45);
+
+  .label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.05rem;
+    color: #FFC107;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FFC107;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.8);
+  }
+
+  .sep {
+    color: rgba(255, 255, 255, 0.15);
+  }
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    gap: 8px;
+    font-size: 1.15rem;
+
+    .sep { display: none; }
+  }
+`;
+
 export const BrandName = styled.h2`
   font-size: 2.8rem;
   font-weight: 800;
@@ -93,15 +143,20 @@ export const BrandName = styled.h2`
 /* ─── Link columns ──────────────────────────────────────── */
 export const LinkList = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   gap: 56px;
   list-style: none;
 
+  @media ${(p) => p.theme.breakpoints.lg} {
+    gap: 36px;
+  }
   @media ${(p) => p.theme.breakpoints.md} {
-    gap: 32px;
+    gap: 28px;
   }
   @media ${(p) => p.theme.breakpoints.sm} {
-    gap: 24px;
-    flex-wrap: wrap;
+    gap: 22px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 `;
 
@@ -165,6 +220,36 @@ export const SocialContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+export const LegalRow = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.28);
+
+  span:first-child { margin-right: auto; }
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1rem;
+    gap: 12px;
+
+    span:first-child { margin-right: 0; }
+  }
+`;
+
+export const LegalLink = styled.a`
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.25s ease;
+
+  &:hover { color: #FFC107; }
 `;
 
 /* legacy alias used in Footer.js */

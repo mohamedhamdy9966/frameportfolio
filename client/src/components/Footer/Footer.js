@@ -9,6 +9,7 @@ import {
 import { FaWhatsapp, FaTelegram, FaSnapchat, FaPinterest, FaTiktok, FaYoutube  } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { SocialIcons } from "../Header/HeaderStyles";
+import { siteConfig, softwareProjects } from "../../constants/constants";
 import {
   FooterWrapper,
   FooterInner,
@@ -17,12 +18,16 @@ import {
   BrandColumn,
   BrandName,
   Slogan,
+  SloganMini,
   LinkList,
   LinkColumn,
   LinkTitle,
   LinkItem,
   Copyright,
   SocialContainer,
+  LegalRow,
+  LegalLink,
+  ContactLine,
 } from "./FooterStyles";
 
 const socials = [
@@ -32,7 +37,8 @@ const socials = [
   { Icon: FaTiktok , href: "https://tiktok.com", label: "TikTok" },
   { Icon: FaYoutube , href: "https://youtube.com", label: "YouTube" },
   { Icon: FaXTwitter , href: "https://twitter.com", label: "Twitter" },
-  { Icon: FaWhatsapp, href: "https://wa.me/01111255279", label: "WhatsApp" },
+  // wa.me requires the international format (no leading zero).
+  { Icon: FaWhatsapp, href: siteConfig.whatsapp, label: "WhatsApp" },
   { Icon: FaTelegram, href: "https://t.me/taxi", label: "Telegram" },
   {
     Icon: FaSnapchat,
@@ -47,44 +53,90 @@ const socials = [
 ];
 
 const Footer = () => (
-  <FooterWrapper>
+ <FooterWrapper>
     <FooterInner>
       <FooterTop>
         {/* Brand column */}
         <BrandColumn>
           <BrandName>TAXI</BrandName>
           <Slogan>
-            Accelerating brands through data-driven marketing. Fast results.
-            Measurable growth.
+            Accelerating brands through data-driven marketing and custom
+            software. Fast results. Measurable growth.
           </Slogan>
+          <SloganMini>
+            {siteConfig.address} · {siteConfig.workingHours}
+          </SloganMini>
         </BrandColumn>
 
         {/* Link columns */}
         <LinkList>
           <LinkColumn>
             <LinkTitle>Contact</LinkTitle>
-            <LinkItem href="tel:01111255279">01111255279</LinkItem>
-            <LinkItem href="mailto:info@taxi.com">info@taxi.com</LinkItem>
+            <LinkItem href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</LinkItem>
+            <LinkItem href={`mailto:${siteConfig.email}`}>{siteConfig.email}</LinkItem>
+            <LinkItem
+              href={siteConfig.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp ↗
+            </LinkItem>
           </LinkColumn>
+
           <LinkColumn>
-            <LinkTitle>Services</LinkTitle>
+            <LinkTitle>Software</LinkTitle>
+            <LinkItem href="#software">Web Platforms</LinkItem>
+            <LinkItem href="#software">Mobile Apps</LinkItem>
+            <LinkItem href="#software">SaaS &amp; Systems</LinkItem>
+            <LinkItem href="#software">API &amp; DevOps</LinkItem>
+          </LinkColumn>
+
+          <LinkColumn>
+            <LinkTitle>Marketing</LinkTitle>
             <LinkItem href="#tech">Digital Strategy</LinkItem>
             <LinkItem href="#tech">Paid Ads</LinkItem>
-            <LinkItem href="#tech">SEO & Content</LinkItem>
+            <LinkItem href="#tech">SEO &amp; Content</LinkItem>
+            <LinkItem href="#tech">CRO &amp; Analytics</LinkItem>
           </LinkColumn>
+
+          <LinkColumn>
+            <LinkTitle>Products</LinkTitle>
+            {softwareProjects.map(({ id, name, url }) => (
+              <LinkItem
+                key={id}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {name} ↗
+              </LinkItem>
+            ))}
+          </LinkColumn>
+
           <LinkColumn>
             <LinkTitle>Company</LinkTitle>
             <LinkItem href="#about">About</LinkItem>
             <LinkItem href="#projects">Projects</LinkItem>
-            <LinkItem href="#projects">Case Studies</LinkItem>
+            <LinkItem href="#approach">Pricing</LinkItem>
+            <LinkItem href="#faq">FAQ</LinkItem>
+            <LinkItem href="#contact">Get a Quote</LinkItem>
           </LinkColumn>
         </LinkList>
       </FooterTop>
 
+      {/* Address / hours strip */}
+      <ContactLine>
+        <span className="label">Available to new projects</span>
+        <span className="dot" aria-hidden="true" />
+        <span>First reply within {siteConfig.responseTime.toLowerCase()}</span>
+        <span className="sep" aria-hidden="true">|</span>
+        <span>Sun – Thu · 9:00 – 18:00 (GMT+2)</span>
+      </ContactLine>
+
       {/* Bottom row */}
       <FooterBottom>
         <Copyright>
-          © {new Date().getFullYear()} Taxi Digital Solutions Agency. All rights
+          © {new Date().getFullYear()} Taxi Digital Solutions. All rights
           reserved.
         </Copyright>
 
@@ -103,13 +155,28 @@ const Footer = () => (
                 aria-label={label}
               >
                 <Icon size="30px" />
-              </SocialIcons>
-            </motion.div>
-          ))}
-        </SocialContainer>
-      </FooterBottom>
-    </FooterInner>
-  </FooterWrapper>
-);
+                            </SocialIcons>
+                          </motion.div>
+                        ))}
+                      </SocialContainer>
+                    </FooterBottom>
+
+                    {/* Legal row */}
+                    <LegalRow>
+                      <span>Built in Cairo, shipped worldwide.</span>
+                      <LegalLink href="#faq">FAQ</LegalLink>
+                      <LegalLink href="#contact">Contact</LegalLink>
+                      <LegalLink href="#approach">Pricing</LegalLink>
+                      <LegalLink
+                        href={siteConfig.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        WhatsApp
+                      </LegalLink>
+                    </LegalRow>
+                  </FooterInner>
+               </FooterWrapper>
+              );
 
 export default Footer;

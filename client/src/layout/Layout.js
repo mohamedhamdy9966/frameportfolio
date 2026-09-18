@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
+import ScrollTools from '../components/ScrollTools/ScrollTools';
 import { Container } from './LayoutStyles';
 
 const pageVariants = {
@@ -17,6 +18,7 @@ export const Layout = ({ children }) => {
 
   return (
     <Container>
+      <ScrollTools />
       <Header />
       <AnimatePresence mode="wait">
         <motion.main

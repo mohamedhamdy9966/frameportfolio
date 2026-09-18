@@ -131,6 +131,19 @@ export const Tag = styled.li`
   }
 `;
 
+export const CardFootnote = styled.p`
+  margin-top: 14px;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.35);
+
+  a {
+    color: #FFC107;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+`;
+
 export const UtilityList = styled.ul`
   list-style-type: none;
   padding: 0;

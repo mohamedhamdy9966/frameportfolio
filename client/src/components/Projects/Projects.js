@@ -16,6 +16,7 @@ import {
   UtilityList,
   CardInfo,
   Img,
+  CardFootnote,
 } from "./ProjectsStyles";
 import { Section, SectionDivider, SectionTitle } from "../../styles/GlobalComponents";
 import { projects } from "../../constants/constants";
@@ -95,6 +96,15 @@ const Projects = () => {
                       </ExternalLinks>
                     </motion.li>
                   </UtilityList>
+
+                  {/* The first entry has no public URL, so offer the next
+                      step instead of a link that goes nowhere useful. */}
+                  {visit === '#contact' && (
+                    <CardFootnote>
+                      Full case study available on request —{' '}
+                      <a href="#contact">ask us for the numbers</a>.
+                    </CardFootnote>
+                  )}
                 </CardBody>
               </BlogCard>
             </motion.div>

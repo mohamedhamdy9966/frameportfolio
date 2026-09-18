@@ -150,6 +150,214 @@ export const SocialIcons = styled.a`
 `;
 
 /* ─── Dropdown ─────────────────────────────────────────── */
+export const NavLinkActive = styled.a`
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #FFC107;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 193, 7, 0.35);
+  background: rgba(255, 193, 7, 0.1);
+  white-space: nowrap;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+  }
+`;
+
+/* Services dropdown (desktop) */
+export const ServicesTrigger = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: ${({ $open }) => ($open ? '#FFC107' : 'rgba(255, 255, 255, 0.7)')};
+  background: ${({ $open }) => ($open ? 'rgba(255, 193, 7, 0.08)' : 'transparent')};
+  border: 1px solid ${({ $open }) => ($open ? 'rgba(255, 193, 7, 0.25)' : 'transparent')};
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    color: #FFC107;
+    background: rgba(255, 193, 7, 0.08);
+    border-color: rgba(255, 193, 7, 0.25);
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+    transform: rotate(${({ $open }) => ($open ? '180deg' : '0deg')});
+  }
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    display: none;
+  }
+`;
+
+export const ServicesMenu = styled.div`
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 10px;
+  border-radius: 16px;
+  background: rgba(10, 10, 10, 0.98);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  z-index: 1200;
+`;
+
+export const ServicesItem = styled.a`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+
+  &:hover { background: rgba(255, 193, 7, 0.08); }
+
+  .icon {
+    color: #FFC107;
+    font-size: 2rem;
+    line-height: 1;
+    display: flex;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .body { display: flex; flex-direction: column; gap: 2px; }
+
+  .title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.01em;
+  }
+
+  .desc {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.45);
+  }
+`;
+
+/* Mobile menu */
+export const MenuToggle = styled.button`
+  display: none;
+  cursor: pointer;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    color: #FFC107;
+    background: rgba(255, 193, 7, 0.08);
+    border: 1px solid rgba(255, 193, 7, 0.25);
+  }
+`;
+
+export const MobileSheet = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  background: rgba(6, 6, 6, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 32px;
+  overflow-y: auto;
+`;
+
+export const MobileSheetHead = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #FFC107;
+    background: rgba(255, 193, 7, 0.08);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+`;
+
+export const MobileGroupLabel = styled.p`
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 22px 0 10px;
+`;
+
+export const MobileLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 4px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  span { color: #FFC107; }
+
+  &:active { color: #FFC107; }
+`;
+
+export const MobileCta = styled.a`
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  border-radius: 999px;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #0A0A0A;
+  background: linear-gradient(90deg, #FFC107, #FF8C00);
+  box-shadow: 0 6px 26px rgba(255, 193, 7, 0.4);
+`;
+
+export const MobileSocials = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+`;
+
+/* Dropdown */
 export const ContactDropDown = styled.button`
   border: none;
   display: flex;
