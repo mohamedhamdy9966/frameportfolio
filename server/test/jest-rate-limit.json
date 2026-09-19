@@ -2,11 +2,11 @@
   "moduleFileExtensions": ["js", "json", "ts"],
   "rootDir": ".",
   "testEnvironment": "node",
-  "testRegex": ".e2e-spec.ts$",
+  "testRegex": "rate-limit\\.e2e-spec\\.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },
-  "setupFiles": ["<rootDir>/setup-env.ts"],
+  "setupFiles": ["<rootDir>/setup-env-rate-limit.ts"],
   "maxWorkers": 1,
   "testTimeout": 20000,
   "forceExit": true

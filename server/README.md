@@ -1,98 +1,182 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Taxi Digital Solutions - API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The NestJS backend for the Taxi portfolio site and admin portal.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+It serves two jobs:
 
-## Description
+1. **Content** - projects, services, shipped software, FAQs and pricing, so the
+   client and admin apps read from one source instead of duplicating strings.
+2. **Enquiries** - the quote form endpoint, plus an admin surface for triaging
+   the leads that come out of it.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## Quick start
 
 ```bash
-$ yarn install
+npm install
+cp .env.example .env      # then edit ADMIN_API_KEY
+npm run start:dev
 ```
 
-## Compile and run the project
+The API listens on `http://localhost:3001` and the docs are at
+`http://localhost:3001/api/docs`.
+
+> **Port note:** the client expects `PORT=3001` so it does not collide with the
+> Next.js dev server on 3000.
+
+## API surface
+
+All endpoints are under `/api/v1`. Health is deliberately unprefixed.
+
+| Method | Path | Auth | Purpose |
+|---|---|
+| GET | `/health` | - | Liveness probe (200 healthy / 503 degraded) |
+| GET | `/api/v1` | - | Service banner + endpoint map |
+| GET | `/api/v1/status` | - | Uptime, version, environment |
+| GET | `/api/v1/content/bootstrap` | - | Everything the homepage needs, in one call |
+| GET | `/api/v1/content/site` | - | Brand, contact details, hero + impact stats |
+| GET | `/api/v1/content/projects` | - | Case studies (`?search=`, `?category=`, `?tag=`, `?page=`, `?limit=`) |
+| GET | `/api/v1/content/projects/featured` | - | Featured case studies |
+| GET | `/api/v1/content/projects/tags` | - | Distinct tags, for filter chips |
+| GET | `/api/v1/content/projects/:id` | - | One case study |
+| GET | `/api/v1/content/services` | - | Services (`?category=marketing\|software`) |
+| GET | `/api/v1/content/services/:id` | - | One service |
+| GET | `/api/v1/content/software` | - | Shipped platforms with stack + metrics |
+| GET | `/api/v1/content/software/:id` | - | One platform |
+| GET | `/api/v1/content/testimonials` | - | Verified testimonials only by default |
+| GET | `/api/v1/content/faqs` | - | FAQ (`?search=`) |
+| GET | `/api/v1/content/pricing` | - | Engagement models |
+| GET | `/api/v1/content/process` | - | Five-stage delivery process |
+| GET | `/api/v1/content/milestones` | - | Company timeline |
+| GET | `/api/v1/content/form-options` | - | Select options for the quote form |
+| POST | `/api/v1/enquiries` | - | Submit a quote request (5/min per IP) |
+| GET | `/api/v1/enquiries` | `x-api-key` | List enquiries (`?status=`, `?search=`, `?page=`, `?limit=`) |
+| GET | `/api/v1/enquiries/stats` | `x-api-key` | Pipeline counts |
+| GET | `/api/v1/enquiries/:id` | `x-api-key` | One enquiry |
+| PATCH | `/api/v1/enquiries/:id/status` | `x-api-key` | Move a lead through the pipeline |
+| DELETE | `/api/v1/enquiries/:id` | `x-api-key` | Delete an enquiry |
+
+## Response envelope
+
+Every response uses one shape, so a client never has to branch on whether an
+endpoint wrapped its payload:
+
+```jsonc
+// success
+{ "success": true, "data": { ... }, "meta": { "total": 4, "page": 1, ... } }
+
+// failure
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "One or more fields are invalid.",
+    "details": ["email must be a valid email address"],
+    "path": "/api/v1/enquiries",
+    "requestId": "eab4263e-...",
+    "timestamp": "2026-09-19T10:54:18.701Z"
+  }
+}
+```
+
+Error `code` values are stable and safe to switch on: `VALIDATION_ERROR`,
+`NOT_FOUND`, `UNAUTHORIZED`, `RATE_LIMITED`, `INTERNAL_SERVER_ERROR`, and so on.
+
+Every response also carries an `X-Request-Id` header. Quote it in a bug report
+and the whole request can be traced through the logs.
+
+## Connecting the client
+
+The client's `app/api/contact/route.js` currently validates and accepts
+enquiries locally. To forward them here instead, replace the marked TODO with:
+
+```js
+await fetch(`${process.env.API_URL}/api/v1/enquiries`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload),
+});
+```
+
+The option lists in `client/src/constants/constants.js` mirror
+`GET /api/v1/content/form-options`, and the server validates against the same
+values - so a value the form offers is always a value the API accepts.
+
+## Configuration
+
+Validated on boot; the process refuses to start on a bad environment rather
+than failing later at runtime. See `.env.example` for the full list.
+
+| Variable | Default | Notes |
+|---|---|---|
+| `PORT` | `3000` | Use `3001` locally to avoid the client |
+| `API_PREFIX` | `api` | |
+| `CORS_ORIGINS` | localhost:3000,3001 | Comma-separated allow-list - no wildcard |
+| `THROTTLE_LIMIT` / `THROTTLE_TTL` | `120` / `60` | Global rate limit |
+| `ENQUIRY_THROTTLE_LIMIT` | `5` | Per-minute burst cap on the public POST |
+| `MAX_STORED_ENQUIRIES` | `500` | In-memory retention |
+| `ADMIN_API_KEY` | `change-me-in-production` | **Must be changed** - see below |
+| `ENABLE_SWAGGER` | `false` | Docs are auto-served outside production |
+
+### Admin access
+
+`ADMIN_API_KEY` protects every endpoint that returns captured personal data.
+While it is still the default value the guard **refuses all admin requests** and
+logs a warning, so a misconfigured deploy can never silently expose the leads.
+Set it to something long and random:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+openssl rand -hex 32
 ```
 
-## Run tests
+## Testing
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+npm test          # unit - services and business rules
+npm run test:e2e  # e2e - the real HTTP contract
+npm run test:cov  # coverage
 ```
 
-## Deployment
+The e2e suite runs in two passes because the `@Throttle` decorator resolves its
+limit once per module load: the main suite raises the burst cap so it can fire
+many submissions, then `rate-limit.e2e-spec.ts` runs separately at the shipped
+value to prove the limiter really rejects a burst.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Architecture
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
+```
+src/
+  config/          env schema, typed namespaces
+  common/
+    dto/           pagination contract shared by every list endpoint
+    filters/       one error shape for the whole API
+    guards/        admin API-key guard (timing-safe compare)
+    interfaces/    response envelope types
+    middleware/    request logging + correlation ids
+  content/         portfolio content, read-only
+  enquiries/       quote submissions + admin triage
+  health/          liveness probes
+  setup-app.ts     pipes, filters, CORS, versioning - shared by main.ts and tests
+  main.ts          process bootstrap
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Known gaps
 
-## Resources
+Being explicit about what is **not** production-ready yet:
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- **Enquiry storage is in-memory.** Enquiries vanish on restart. This is
+  deliberate - it keeps the server runnable with zero infrastructure. Before
+  real traffic, replace the four private helpers at the bottom of
+  `EnquiriesService` with Prisma or TypeORM. Nothing outside that file knows how
+  enquiries are stored, so this is a contained change.
+- **Submissions are not emailed.** Enquiries are stored but nobody is notified.
+  Wire the marked TODO in `EnquiriesController.create` to a transactional email
+  provider (Resend, SendGrid, SES).
+- **Content is static.** Editable content still lives in
+  `content/data/portfolio.data.ts`. The controller and DTO shapes are already
+  what a CMS would serve, so swapping the source does not change the API.
+- **Testimonials are placeholders.** Every entry has `verified: false` and is
+  withheld from `/content/testimonials` and `/content/bootstrap` by default.
+  Replace them with attributable quotes before publishing.
+- **No authentication provider.** Admin access is a shared API key, which is
+  enough for one operator but not for per-user accounts. Move to JWT or session
+  auth before more than one person needs access.
