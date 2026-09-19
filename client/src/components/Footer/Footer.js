@@ -144,7 +144,7 @@ const Footer = () => (
           {socials.map(({ Icon, href, label }) => (
             <motion.div
               key={label}
-              whileHover={{ scale: 1.3, rotate: 10 }}
+              whileHover={{ scale: 1.22, rotate: 8 }}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 350, damping: 14 }}
             >
@@ -153,12 +153,13 @@ const Footer = () => (
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
+                title={label}
               >
-                <Icon size="30px" />
-                            </SocialIcons>
-                          </motion.div>
-                        ))}
-                      </SocialContainer>
+                <Icon size="24px" />
+              </SocialIcons>
+            </motion.div>
+          ))}
+        </SocialContainer>
                     </FooterBottom>
 
                     {/* Legal row */}

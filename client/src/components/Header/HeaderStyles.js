@@ -14,7 +14,13 @@ const glow = keyframes`
 /* ─── Wrapper ─────────────────────────────────────────── */
 export const Container = styled.header`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /*
+    The social rail sizes to its content rather than taking an equal fifth
+    of the row. Forcing it into an equal fraction previously squeezed ten
+    icons into a narrow column where they overflowed the viewport and pushed
+    the mobile menu button out of reach.
+  */
+  grid-template-columns: auto minmax(0, 1fr) auto;
   grid-template-rows: 1fr;
   grid-column-gap: 2rem;
   padding: 1.2rem 2rem;
@@ -26,17 +32,23 @@ export const Container = styled.header`
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 193, 7, 0.12);
   transition: background 0.3s ease;
+  /* A sticky bar must never be the thing that widens the document. */
+  max-width: 100vw;
 
   &:hover {
     background: rgba(8, 8, 8, 0.95);
   }
 
+  @media ${(p) => p.theme.breakpoints.lg} {
+    grid-column-gap: 1.2rem;
+    padding: 1.2rem 1.6rem;
+  }
+
   @media ${(p) => p.theme.breakpoints.sm} {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 56px);
-    grid-column-gap: 0.5rem;
-    grid-row-gap: 0.5rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto;
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.6rem;
     padding: 0.8rem 1rem;
   }
 `;
@@ -47,35 +59,79 @@ export const Div1 = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 0;
 
   @media ${(p) => p.theme.breakpoints.sm} {
-    grid-area: 1 / 1 / 2 / 3;
+    grid-area: 1 / 1 / 2 / 2;
   }
 `;
 
 export const Div2 = styled.div`
-  grid-area: 1 / 2 / 2 / 5;
+  grid-area: 1 / 2 / 2 / 3;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  min-width: 0;
+
+  @media ${(p) => p.theme.breakpoints.lg} {
+    gap: 0.4rem;
+  }
 
   @media ${(p) => p.theme.breakpoints.sm} {
-    grid-area: 2 / 1 / 3 / 6;
-    justify-content: space-around;
+    /* Nav drops to its own full-width row so it can never compete with the
+       logo or the social rail for horizontal space. */
+    grid-area: 2 / 1 / 3 / 4;
+    justify-content: space-between;
+    gap: 0.4rem;
+    flex-wrap: wrap;
   }
 `;
 
 export const Div3 = styled.div`
-  grid-area: 1 / 5 / 2 / 6;
+  grid-area: 1 / 3 / 2 / 4;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 0.4rem;
+  min-width: 0;
 
   @media ${(p) => p.theme.breakpoints.sm} {
-    grid-area: 1 / 4 / 2 / 6;
+    grid-area: 1 / 3 / 2 / 4;
     justify-content: flex-end;
+    gap: 0;
+  }
+`;
+
+/**
+ * Desktop-only slice of the social rail.
+ *
+ * Ten icons is roughly 340px of chrome. Showing all of them in the bar
+ * squeezes the nav on tablets, so the rail progressively reveals them as
+ * space allows and the mobile sheet carries the complete list instead.
+ */
+export const SocialDesktop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  /* Below 1280px only the six core networks stay in the bar. */
+  @media ${(p) => p.theme.breakpoints.xl} {
+    & > *:nth-child(n + 7) {
+      display: none;
+    }
+  }
+
+  /* Below 1024px trim to four — the nav needs the room more than the rail. */
+  @media ${(p) => p.theme.breakpoints.lg} {
+    & > *:nth-child(n + 5) {
+      display: none;
+    }
+  }
+
+  /* Phones use the menu sheet, which lists every network. */
+  @media ${(p) => p.theme.breakpoints.sm} {
+    display: none;
   }
 `;
 
@@ -100,9 +156,14 @@ export const NavLink = styled.a`
     cursor: pointer;
   }
 
+  @media ${(p) => p.theme.breakpoints.lg} {
+    font-size: 1.3rem;
+    padding: 0.5rem 0.9rem;
+  }
   @media ${(p) => p.theme.breakpoints.sm} {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 1.15rem;
+    padding: 0.4rem 0.7rem;
+    letter-spacing: 0.03em;
   }
 `;
 
@@ -126,6 +187,10 @@ export const CtaLink = styled.a`
     cursor: pointer;
   }
 
+  @media ${(p) => p.theme.breakpoints.lg} {
+    font-size: 1.25rem;
+    padding: 0.6rem 1.2rem;
+  }
   @media ${(p) => p.theme.breakpoints.sm} {
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
@@ -141,11 +206,22 @@ export const SocialIcons = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Never let a flex parent squash the tap target. */
+  flex: 0 0 auto;
+  line-height: 0;
 
   &:hover {
     color: #FFC107;
     transform: scale(1.25) rotate(10deg);
     cursor: pointer;
+  }
+
+  /* Pointer devices get the playful scale; touch devices should not
+     translate a tap into a 1.25x layout shift mid-gesture. */
+  @media (hover: none) {
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
@@ -163,9 +239,14 @@ export const NavLinkActive = styled.a`
   background: rgba(255, 193, 7, 0.1);
   white-space: nowrap;
 
+  @media ${(p) => p.theme.breakpoints.lg} {
+    font-size: 1.3rem;
+    padding: 0.5rem 0.9rem;
+  }
   @media ${(p) => p.theme.breakpoints.sm} {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 1.15rem;
+    padding: 0.4rem 0.7rem;
+    letter-spacing: 0.03em;
   }
 `;
 

@@ -1,6 +1,6 @@
 # TAXI Portfolio Workspace
 
-Welcome to the **Frame Portfolio** project! This repository uses a monorepo-style structure to house the entire application stack for the portfolio system. It is divided into three distinct applications, each serving a specific purpose.
+Welcome to the **TAXI Portfolio** project! This repository uses a monorepo-style structure to house the entire application stack for the portfolio system. It is divided into three distinct applications, each serving a specific purpose.
 
 ## 📂 Project Structure
 

@@ -153,10 +153,13 @@ export const LinkList = styled.ul`
   @media ${(p) => p.theme.breakpoints.md} {
     gap: 28px;
   }
+  /* Two even columns read better than a ragged wrap once the five link
+     columns no longer fit on one row. */
   @media ${(p) => p.theme.breakpoints.sm} {
-    gap: 22px;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 20px;
+    width: 100%;
   }
 `;
 
@@ -164,6 +167,14 @@ export const LinkColumn = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 120px;
+  /* Allows long addresses and emails to wrap instead of forcing the
+     column wider than its grid track. */
+  min-width: 0;
+  overflow-wrap: anywhere;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    min-width: 0;
+  }
 `;
 
 export const LinkTitle = styled.h4`
@@ -202,11 +213,14 @@ export const FooterBottom = styled.div`
   flex-wrap: wrap;
   gap: 16px;
 
-  @media ${(p) => p.theme.breakpoints.sm} {
+  /* Centred rather than stretch-aligned, so the social grid keeps its
+     fixed max-width instead of being forced to the container edges. */
+  @media ${(p) => p.theme.breakpoints.md} {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    gap: 12px;
+    gap: 14px;
   }
 `;
 
@@ -219,7 +233,25 @@ export const Copyright = styled.p`
 export const SocialContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
+  min-width: 0;
+
+  /*
+    Ten icons at 30px plus gaps is roughly 400px of chrome. On a phone that
+    previously wrapped into a ragged staircase inside a centred column, and
+    on a tablet it squeezed the copyright onto two cramped lines.
+    Below the tablet breakpoint the rail becomes an even 5-across grid so it
+    reads as one block instead of a wrapped list.
+  */
+  @media ${(p) => p.theme.breakpoints.md} {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    justify-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 320px;
+  }
 `;
 
 export const LegalRow = styled.div`

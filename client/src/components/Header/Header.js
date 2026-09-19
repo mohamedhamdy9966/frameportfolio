@@ -35,6 +35,7 @@ import {
   NavLinkActive,
   CtaLink,
   SocialIcons,
+  SocialDesktop,
   CheckeredStrip,
   ServicesTrigger,
   ServicesMenu,
@@ -360,20 +361,30 @@ const Header = () => {
           </motion.li>
         </Div2>
 
-        {/* ── Social icons ── */}
+        {/* ── Social icons + menu toggle ──
+             The rail is progressively trimmed by SocialDesktop as the
+             viewport narrows, so the menu button is never pushed off-screen
+             by ten icons competing for the same row. */}
         <Div3 ref={socialRef}>
-          {socialLinks.map(({ Icon, href, label }) => (
-            <motion.div
-              key={label}
-              whileHover={{ scale: 1.3, rotate: 15 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400, damping: 12 }}
-            >
-              <SocialIcons href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
-                <Icon size="2.2rem" />
-              </SocialIcons>
-            </motion.div>
-          ))}
+          <SocialDesktop>
+            {socialLinks.map(({ Icon, href, label }) => (
+              <motion.div
+                key={label}
+                whileHover={{ scale: 1.25, rotate: 12 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 12 }}
+              >
+                <SocialIcons
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <Icon size="2rem" />
+                </SocialIcons>
+              </motion.div>
+            ))}
+          </SocialDesktop>
 
           <MenuToggle
             type="button"
